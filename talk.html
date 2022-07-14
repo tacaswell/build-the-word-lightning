@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Building the least stable virtual env</title>
+<meta name="author" content="Thomas A Caswell"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./src/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./src/reveal.js/dist/theme/simple.css" id="theme"/>
+
+<link rel="stylesheet" href="org.css"/>
+<link rel="stylesheet" href="./src/reveal.js/plugin/highlight/monokai.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h3>Building the least stable virtual env</h3>
+<h4>Thomas A Caswell</h4>
+</section>
+
+<section>
+<section id="slide-org55e11f6">
+<h2 id="org55e11f6">Me</h2>
+<div class='left'>
+
+<p>
+Find me online:
+</p>
+
+<ul>
+<li><a href="https://tacaswell.github.io">tacaswell.github.io</a></li>
+<li><a href="https://github.com/tacaswell">@tacaswell</a> on GitHub</li>
+
+</ul>
+
+</div>
+
+<div class='right'>
+
+<ul>
+<li>Matplotlib Project lead</li>
+<li>h5py core developer</li>
+<li>Q2 2022 PSF fellow</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgaea6de3">
+<h2 id="orgaea6de3">Change happens</h2>
+<ul>
+<li class="fragment roll-in">The best thing about software: It changes! 🎉</li>
+<li class="fragment roll-in">The worst thing about software: It changes! 💔</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgbe1af47">
+<h2 id="orgbe1af47">version numbers to the rescue</h2>
+<p>
+Use SemVer to manage this change:
+</p>
+
+<ul>
+<li class="fragment roll-in">Y.0.0 : major release, non-backcompatible breaking changes</li>
+<li class="fragment roll-in">y.X.0 : minor release, new features but no breakage changes</li>
+<li class="fragment roll-in">y.x.Z : patch release, no new-features only bug fixes</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orga5cb8ea">
+<h2 id="orga5cb8ea">however some major problems&#x2026;.</h2>
+<p>
+tries to compress too much information into 3 numbers
+</p>
+
+<ul>
+<li class="fragment roll-in">if you do not use the API that change, do not notice the breakage!</li>
+<li class="fragment roll-in">mistakes happen and bugs get released</li>
+<li class="fragment roll-in">the line between "bug" and "feature" is in the eye of the beholder</li>
+
+</ul>
+
+
+<div class="figure">
+<p><img src="./images/workflow.png" alt="workflow.png" class="fragment roll-in" width="200px" />
+</p>
+</div>
+
+<p class="fragment roll-in">
+(google "xkcd workflow") <a href="https://xkcd.com/1172/" class="fragment roll-in">https://xkcd.com/1172/</a>
+</p>
+
+<p class="fragment roll-in">
+With enough eyes all bugs are <del>shallow</del> features
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org29bd70b">
+<h2 id="org29bd70b">honest SemVer</h2>
+<ul>
+<li class="fragment roll-in">Y.0.0 : we broke you on purpose!</li>
+<li class="fragment roll-in">y.X.0 : we broke you by accident!</li>
+<li class="fragment roll-in">y.x.Z : we intentionally broke your workaround to the last time we broke you on accident</li>
+
+</ul>
+
+<p class="fragment roll-in">
+this is a joke
+</p>
+
+<p class="fragment roll-in">
+&#x2026;..mostly
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org064ecb0">
+<h2 id="org064ecb0">how you can help: Test pre-release code!</h2>
+<ul>
+<li>well-run libraries <b><b>love</b></b> bug reports that we broke down stream projects on main</li>
+<li>much better to fix before release than after
+<ul>
+<li>changes are fresh in our minds</li>
+<li>fixing bugs is easier when not under time pressure</li>
+
+</ul></li>
+<li class="fragment roll-in">watch for an run RCs from pypi:  <code>pip install --pre ...</code></li>
+<li class="fragment roll-in">Install RCs from conda-forge (<a href="https://conda-forge.org/docs/maintainer/knowledge_base.html#pre-release-builds">check their docs</a>)</li>
+<li class="fragment roll-in">Some projects publish nightly wheels (<a href="https://matplotlib.org/devdocs/users/installing/index.html#installing-a-nightly-build">check docs</a>)</li>
+<li class="fragment roll-in">install your dependencies from source from their default branch</li>
+<li class="fragment roll-in">install your dependencies dependencies from their default branch</li>
+<li class="fragment roll-in">install your dependencies dependencies dependencies from their default branch</li>
+<li class="fragment roll-in">&#x2026;</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org1bc85a6">
+<h2 id="org1bc85a6">"What are we going to do tonight Brain?"</h2>
+<p class="fragment roll-in">
+"the same thing we do every night Pinky:  try to <del>take over</del> <b><b>rebuild the world!</b></b>"
+</p>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org2ecfa07">
+<h2 id="org2ecfa07">build the world</h2>
+<p>
+<a href="https://github.com/tacaswell/build_the_world">https://github.com/tacaswell/build_the_world</a>
+</p>
+
+
+
+<div class="figure">
+<p><img src="./images/repo.png" alt="repo.png" width="500px" />
+</p>
+</div>
+
+<ul>
+<li class="fragment roll-in">pile of xonsh + Python which will build a lot of the scipy stack starting from CPython</li>
+<li class="fragment roll-in">manages 120 source checkouts</li>
+<li class="fragment roll-in">it is trash code&#x2026;.but it works</li>
+<li class="fragment roll-in">well, most of the time</li>
+<li class="fragment roll-in">have found and reported bugs in CPython, Cython, numpy, scipy, pandas &#x2026;</li>
+<li class="fragment roll-in">do may day-to-day development and work in this environment</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org3fc61d6">
+<h2 id="org3fc61d6">how it works (roughly)</h2>
+<ol>
+<li>build cpython</li>
+<li>make a venv ( <code>python -m venv bleeding</code>)</li>
+<li>activate the environment</li>
+<li>for each project: <code>pip install -v --no-build-isolation .</code></li>
+<li class="fragment roll-in">Profit! (?)</li>
+
+</ol>
+
+</section>
+</section>
+<section>
+<section id="slide-orgcc6be5a">
+<h2 id="orgcc6be5a">Join me!</h2>
+<p>
+I'm looking for anyone else who wants to do this
+</p>
+
+<ul>
+<li>fun to dig into a code base you have never seen before and debug them</li>
+<li>service to community: every bug caught early is a bug users do not see</li>
+<li>I am around for the sprints (also doing Matplotlib and h5py)</li>
+
+</ul>
+
+
+<p>
+<a href="https://github.com/tacaswell/build_the_world">https://github.com/tacaswell/build_the_world</a>
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="./src/reveal.js/dist/reveal.js"></script>
+<script src="./src/reveal.js/plugin/highlight/highlight.js"></script>
+<script src="./src/reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight, RevealNotes]
+});
+
+</script>
+</body>
+</html>
