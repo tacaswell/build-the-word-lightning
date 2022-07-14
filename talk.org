@@ -78,7 +78,7 @@ this is a joke
 
 * how you can help: Test pre-release code!
 
-#+ATTR_REVEAL: :frag (none none roll-in roll-in roll-in roll-in roll-in roll-in)
+#+ATTR_REVEAL: :frag (none none roll-in roll-in roll-in roll-in roll-in roll-in roll-in)
 - well-run libraries **love** bug reports that we broke down stream projects on main
 - much better to fix before release than after
  - changes are fresh in our minds
@@ -87,8 +87,9 @@ this is a joke
 - Install RCs from conda-forge ([[https://conda-forge.org/docs/maintainer/knowledge_base.html#pre-release-builds][check their docs]])
 - Some projects publish nightly wheels ([[https://matplotlib.org/devdocs/users/installing/index.html#installing-a-nightly-build][check docs]])
 - install your dependencies from source from their default branch
-- install your dependencies dependencies from their default branch ...
-- install your dependencies dependencies dependencies from their default branch ...
+- install your dependencies dependencies from their default branch
+- install your dependencies dependencies dependencies from their default branch
+- ...
 
 
 * "What are we going to do tonight Brain?"
