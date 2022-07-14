@@ -3,17 +3,14 @@
 #+REVEAL_HIGHLIGHT_CSS: %r/plugin/highlight/monokai.css
 #+REVEAL_PLUGINS: (highlight notes)
 #+REVEAL_THEME: simple
-#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./images/background_1.jpg
-#+REVEAL_TITLE_SLIDE_BACKGROUND: ./images/background_1.jpg
 #+OPTIONS: toc:nil
 #+OPTIONS: num:nil
 #+REVEAL_EXTRA_CSS: org.css
 
-#+TITLE: SunPy: Python for Solar Physics
-#+AUTHOR: Stuart Mumford
+#+TITLE: Building the least stable virtual env
+#+AUTHOR: Thomas A Caswell
 #+REVEAL_TITLE_SLIDE: <h3>%t</h3>
 #+REVEAL_TITLE_SLIDE: <h4>%a</h4>
-#+REVEAL_TITLE_SLIDE: <a href="https://aperio.software"><img style='float: left; width: 30%%; margin-top: 100px; height: 25%%;' src='images/aperio.svg'/></a><a href="https://sunpy.org"><img style='float: right; width: 30%%; margin-top: 100px; height: 25%%; margin-right: 5%%;' src='images/sunpy.svg'/></a>
 
 * Me
 
@@ -21,51 +18,118 @@
 
 Find me online:
 
-- [[http://stuartmumford.uk][stuartmumford.uk]]
-- [[https://matrix.to/#/@cadair:cadair.com][@cadair:cadair.com]] on Matrix
-- [[https://github.com/Cadair][@Cadair]] on GitHub
-- [[https://twitter.com/stuartmumford][@stuartmumford]] on Twitter
+- [[https://tacaswell.github.io][tacaswell.github.io]]
+- [[https://github.com/tacaswell][@tacaswell]] on GitHub
 
 #+REVEAL_HTML: </div>
 
 #+REVEAL_HTML: <div class='right'>
 
+- Matplotlib Project lead
+- h5py core developer
+- Q2 2022 PSF fellow
+
+* Change happens
+
+#+ATTR_REVEAL: :frag (roll-in roll-in)
+  - The best thing about software: It changes! 🎉
+  - The worst thing about software: It changes! 💔
+
+* version numbers to the rescue
+
+Use SemVer to manage this change:
+
+#+ATTR_REVEAL: :frag (roll-in roll-in roll-in)
+ - Y.0.0 : major release, non-backcompatible breaking changes
+ - y.X.0 : minor release, new features but no breakage changes
+ - y.x.Z : patch release, no new-features only bug fixes
+
+* however some major problems....
+
+tries to compress too much information into 3 numbers
+
+#+ATTR_REVEAL: :frag (roll-in roll-in roll-in roll-in)
+ - if you do not use the API that change, do not notice the breakage!
+ - mistakes happen and bugs get released
+ - the line between "bug" and "feature" is in the eye of the beholder
+
+#+ATTR_REVEAL: :frag roll-in
+#+attr_html: :width 200px
+[[./images/workflow.png]]
+
+#+ATTR_REVEAL: :frag roll-in
+(google "xkcd workflow") [[https://xkcd.com/1172/]]
+
+#+ATTR_REVEAL: :frag roll-in
+With enough eyes all bugs are +shallow+ features
+
+* honest SemVer
+
+#+ATTR_REVEAL: :frag (roll-in roll-in roll-in)
+ - Y.0.0 : we broke you on purpose!
+ - y.X.0 : we broke you by accident!
+ - y.x.Z : we intentionally broke your workaround to the last time we broke you on accident
+
+#+ATTR_REVEAL: :frag roll-in
+this is a joke
+
+#+ATTR_REVEAL: :frag roll-in
+.....mostly
+
+* how you can help: Test pre-release code!
+
+#+ATTR_REVEAL: :frag (none none roll-in roll-in roll-in roll-in roll-in roll-in)
+- well-run libraries **love** bug reports that we broke down stream projects on main
+- much better to fix before release than after
+ - changes are fresh in our minds
+ - fixing bugs is easier when not under time pressure
+- watch for an run RCs from pypi:  =pip install --pre ...=
+- Install RCs from conda-forge ([[https://conda-forge.org/docs/maintainer/knowledge_base.html#pre-release-builds][check their docs]])
+- Some projects publish nightly wheels ([[https://matplotlib.org/devdocs/users/installing/index.html#installing-a-nightly-build][check docs]])
+- install your dependencies from source from their default branch
+- install your dependencies dependencies from their default branch ...
+- install your dependencies dependencies dependencies from their default branch ...
+
+
+* "What are we going to do tonight Brain?"
+
+#+ATTR_REVEAL: :frag roll-in
+"the same thing we do every night Pinky:  try to +take over+ **rebuild the world!**"
+
+
+
+* build the world
+
+https://github.com/tacaswell/build_the_world
+
+
 #+attr_html: :width 500px
-[[./images/cadair.jpg]]
+[[./images/repo.png]]
 
-#+REVEAL_HTML: </div>
+#+ATTR_REVEAL: :frag (roll-in roll-in roll-in roll-in roll-in roll-in)
+ + pile of xonsh + Python which will build a lot of the scipy stack starting from CPython
+ + manages 120 source checkouts
+ + it is trash code....but it works
+ + well, most of the time
+ + have found and reported bugs in CPython, Cython, numpy, scipy, pandas ...
+ + do may day-to-day development and work in this environment
 
-# Some Maths
-* Maths!
+* how it works (roughly)
 
-${n! \over k!(n-k)!} = {n \choose k}$
+#+ATTR_REVEAL: :frag (none none none none roll-in)
+ 1. build cpython
+ 2. make a venv ( =python -m venv bleeding=)
+ 3. activate the environment
+ 4. for each project: =pip install -v --no-build-isolation .=
+ 5. Profit! (?)
 
-\begin{equation}
-x=\sqrt{b}
-\end{equation}
+* Join me!
 
-If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
+I'm looking for anyone else who wants to do this
 
-* Code example with Babel
+- fun to dig into a code base you have never seen before and debug them
+- service to community: every bug caught early is a bug users do not see
+- I am around for the sprints (also doing Matplotlib and h5py)
 
-#+begin_src python :session example :exports both
-  msg = "Hello World"
 
-  msg
-#+end_src
-
-#+RESULTS:
-: Hello World
-
-# AIA
-*
-  :PROPERTIES:
-  :reveal_background: ./images/fulldiskmulticolor.jpg
-  :reveal_background_trans: slide
-  :END:
-
-# DKIST
-*
-  :PROPERTIES:
-  :reveal_extra_attr: data-background-video="" data-background-video-loop=true
-  :END:
+https://github.com/tacaswell/build_the_world
